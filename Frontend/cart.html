@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Orinoco - Vente de peluches - panier</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="index.html">
+      <img src="image/orinoco.png" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav navbar-center">
+        <a class="nav-item nav-link" href="index.html">Accueil</a>
+        <a class="nav-item nav-link" href="#">Contact</a>
+        <a class="nav-item nav-link active" href="cart.html">Panier <span class="sr-only">(current)</span></a>
+      </div>
+    </div>
+  </nav>
+  <section id="panier">
+    <div id="article" class="shadow card form">
+      <h4 class="text-center">Détail de votre panier</h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Couleur</th>
+            <th scope="col">Prix</th>
+          </tr>
+        </thead>
+        <tbody id="details-article"></tbody>
+      </table>
+    </div>
+
+    <div id="formulaire" class="shadow card form">
+      <form method="post" name="panier">
+        <div class="form-group">
+          <label for="formNom">Nom</label>
+          <input type="text" class="form-control" id="formNom">
+        </div>
+        <div class="form-group">
+          <label for="formPrenom">Prénom</label>
+          <input type="text" class="form-control" id="formPrenom">
+        </div>
+        <div class="form-group">
+          <label for="formEmail">E-mail</label>
+          <input type="email" class="form-control" id="formEmail">
+        </div>
+        <div class="form-group">
+          <label for="formAdresse">Adresse</label>
+          <input type="text" class="form-control" id="formAdresse">
+        </div>
+        <div class="form-group">
+          <label for="formVille">Ville</label>
+          <input type="text" class="form-control" id="formVille">
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-outline-secondary">Valider mon panier</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  
+  <script src="teddybear.js"></script>
+  <script src="cartObject.js"></script>
+  <script src="cart.js"></script>
+
+</body>
+</html>
