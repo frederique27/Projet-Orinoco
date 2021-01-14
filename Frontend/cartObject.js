@@ -5,6 +5,7 @@ class CartObject {
     this.colorChosen = document.querySelector(".colorSelect");
     this.price = data.price / 100 + ",00€";
   }  
+
   addToCart () {
     if (localStorage.getItem('cartContent') == null) {
       this.cartContent = [];
@@ -19,17 +20,37 @@ class CartObject {
 
   cartItems () {
     let createTbody = document.querySelector('#details-article');
-    let createTr = document.createElement('tr');
-    createTbody.appendChild(createTr);
     
     let retrievedContent = localStorage.getItem("cartContent");
     let parsedContent = JSON.parse(retrievedContent)
 
-    for(let i = 0; i < parsedContent.length; i++) {
-      const createTd = document.createElement('td');
-      createTd.setAttribute = ('scope', 'row');
-      createTd.textContent = parsedContent[i];
-      createTr.appendChild(createTd);
+    let perChunk = 3 // items per chunk    
+    let result = parsedContent.reduce((resultArray, item, index) => { 
+    const chunkIndex = Math.floor(index/perChunk)
+    if(!resultArray[chunkIndex]) {
+      resultArray[chunkIndex] = [] // start a new chunk
+    }
+    resultArray[chunkIndex].push(item)
+    return resultArray
+    }, [])
+    console.log(result);
+
+    const getDivArticle = document.querySelector('#article');
+    const createTotal = document.createElement('p');
+    let number = 0;
+
+    for(let i = 0; i < result.length; i++) {
+      const createTr = document.createElement('tr');
+      createTbody.appendChild(createTr);
+      for(let j = 0; j < result[i].length; j++) {
+        const createTh = document.createElement('th');
+        createTh.setAttribute = ('scope', 'row');
+        createTh.textContent = result[i][j];
+        createTr.appendChild(createTh);
+      }
+      number += parseInt(result[i][2]);
+      createTotal.textContent = 'Total = ' + number + '€';
+      getDivArticle.appendChild(createTotal);
     }
   }
 }

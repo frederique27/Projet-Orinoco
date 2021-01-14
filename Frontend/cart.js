@@ -11,6 +11,7 @@ request.onload = () => {
 
       const cartInfo = new CartObject(data);
       cartInfo.cartItems();
+      // cartInfo.totalCart ();
     }
   }
 };
