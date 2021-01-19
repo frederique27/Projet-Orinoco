@@ -16,10 +16,6 @@ request.onload = () => {
       const singleProduct = new Teddybear(data);
       singleProduct.renderSingleTeddy();
 
-      const cart = new CartObject(data);
-      document.querySelector('.addToCart').addEventListener('click', () => {
-        cart.addToCart();
-      });
     }
   }
 };

@@ -75,6 +75,13 @@ thead {
     background-color: rgb(243 233 241);
 }
 
+.btnCart {
+    font-size: 14px;
+    width: 125px;
+    padding: 2px!important;
+    margin: 5px;
+}
+
 /* td:last-child {
     border-right-style: hidden;
     border-top-style: hidden;

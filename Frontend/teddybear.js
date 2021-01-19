@@ -91,11 +91,22 @@ class Teddybear {
 
     const btnAddCart = document.createElement('a');
     btnAddCart.setAttribute('class', 'btn btn-outline-secondary addToCart');
-    btnAddCart.setAttribute('href', 'cart.html?id=' + this.id );
+    btnAddCart.setAttribute('href', 'cart.html');
 
     btnAddCart.innerHTML = 'Ajouter au panier';
 
     divCardFooter.appendChild(btnAddCart);
+
+    const cart = new CartObject();
+    document.querySelector('.addToCart').addEventListener('click', () => {
+      cart.addToCart({
+      'name': this.name,
+      'price': this.price,
+      'id': this.id,
+      'color': document.querySelector(".colorSelect").value,
+      }); 
+      //Créer alert
+    });
   }
   
   renderTeddies () {
