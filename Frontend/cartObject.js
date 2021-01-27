@@ -7,87 +7,115 @@ class CartObject {
   checkLocalStorage() {
     if (localStorage.getItem('cartContent') == null) {
       this.cartContent = [];
-      } else {
+    } else {
       this.cartContent = JSON.parse(localStorage.getItem('cartContent'));
-      }
+    }
   }
-
+  
   addToCart(teddybear) {
+    for (let cartItem of this.cartContent) {
+      if (cartItem.id === teddybear.id && cartItem.color === teddybear.color) {
+        cartItem.quantity++;
+        localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
+        return;
+      }
+    }
     this.cartContent.push({
-    'name': teddybear.name,
-    'price': teddybear.price,
-    'id': teddybear.id,
-    'color': teddybear.color,
-    'quantity': 1
+      'name': teddybear.name,
+      'price': teddybear.price,
+      'id': teddybear.id,
+      'color': teddybear.color,
+      'quantity': 1
     });
     localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
   }
-
+ 
   cartItems() {
     let getTbody = document.querySelector('#details-article');
-    console.log(this.cartContent);
+
+    const getPTotal = document.querySelector('.total');
+    let totalPrice = 0;
 
     for(let cartItem of this.cartContent) {
       const createTr = document.createElement('tr');
+      getTbody.appendChild(createTr);
+
       const tdName = document.createElement('td');
       tdName.textContent = cartItem.name;
       createTr.appendChild(tdName);
+
       const tdColor = document.createElement('td');
       tdColor.textContent = cartItem.color;
       createTr.appendChild(tdColor);
+
       const tdQuantity = document.createElement('td');
-      tdQuantity.textContent = cartItem.quantity;
       createTr.appendChild(tdQuantity);
-      getTbody.appendChild(createTr);
+      const divQuantity = document.createElement('div');
+      divQuantity.setAttribute('class', 'adjustQuantity');
+      tdQuantity.appendChild(divQuantity);
+      const buttonLess = document.createElement('p');
+      buttonLess.setAttribute('class', 'addMinus');
+      buttonLess.textContent = '-';
+      divQuantity.appendChild(buttonLess);
+      const Pquantity = document.createElement('p');
+      Pquantity.textContent = cartItem.quantity;
+      divQuantity.appendChild(Pquantity);
+      const buttonAdd = document.createElement('p');
+      buttonAdd.setAttribute('class', 'addMinus');
+      buttonAdd.textContent = '+';
+      divQuantity.appendChild(buttonAdd);
+
+      buttonLess.addEventListener('click', (e) => {
+          cartItem.quantity--;
+          localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
+          Pquantity.textContent = cartItem.quantity;
+          window.location.reload();
+        if (cartItem.quantity === 0) {
+          const id = this.cartContent.indexOf(cartItem);
+          const removedDrink = this.cartContent.splice(id,  1); 
+          localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
+          window.location.reload();
+        }
+      })
+
+      buttonAdd.addEventListener('click', (e) => {
+        cartItem.quantity++;
+        localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
+        Pquantity.textContent = cartItem.quantity;
+        window.location.reload();
+      })
+      
       const tdPrice = document.createElement('td');
       tdPrice.textContent = cartItem.price;
       createTr.appendChild(tdPrice);
+
+      let parsePrice = parseInt(cartItem.price);
+      let parseQuantity = parseInt(cartItem.quantity);
+      totalPrice += parseInt(parsePrice*parseQuantity);
+      getPTotal.textContent = 'Total  ' + '€' + totalPrice;
+
+      const tdDelete = document.createElement('td');
+      tdDelete.setAttribute('class', 'tdDelete');
+      createTr.appendChild(tdDelete);
+      const createIcon = document.createElement('i');
+      createIcon.setAttribute("class", "far fa-trash-alt removeProduct");
+      tdDelete.appendChild(createIcon);
+
+      createIcon.addEventListener('click', (e) => {
+        const id = this.cartContent.indexOf(cartItem);
+          const removedchose = this.cartContent.splice(id,  1); 
+          localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
+          window.location.reload();
+      })     
     }
   }
 
-  deleteValidateCart() {
-    const getDivArticle = document.querySelector('#article');
-    const divEmptyValidate = document.createElement('div');
-    getDivArticle.appendChild(divEmptyValidate);
-    const buttonEmptyCart = document.createElement('button');
-    buttonEmptyCart.setAttribute('type', 'button');
-    buttonEmptyCart.setAttribute('class', 'btn btn-outline-secondary btnCart');
-    buttonEmptyCart.innerHTML = "Vider mon panier";
-    divEmptyValidate.appendChild(buttonEmptyCart);
-    const buttonValidateCart = document.createElement('button');
-    buttonValidateCart.setAttribute('type', 'button');
-    buttonValidateCart.setAttribute('class', 'btn btn-outline-secondary btnCart');
-    buttonValidateCart.innerHTML = "Valider mon panier";
-    divEmptyValidate.appendChild(buttonValidateCart);
+  emptyCart() {
+    const buttonEmptyCart = document.querySelector('#emptyCart');
 
-    buttonEmptyCart.addEventListener('click', function(e) {
+    buttonEmptyCart.addEventListener('click', (e) => {
         localStorage.clear();
         window.location.reload();
     })
-
-    buttonValidateCart.addEventListener('click', function(e) {
-      // localStorage.clear();
-      // window.location.reload();
-    })
   }
 }
-
-// const getDivArticle = document.querySelector('#article');
-    // const createTotal = document.createElement('p');
-    // let number = 0;
-
-    // for(let i = 0; i < this.cartContent.length; i++) {
-    //   const createTr = document.createElement('tr');
-    //   getTbody.appendChild(createTr);
-    //   for(let j = 0; j < this.cartContent[i].length; j++) {
-    //     console.log(this.cartContent[i][j]);
-    //     const createTh = document.createElement('th');
-    //     createTh.setAttribute = ('scope', 'row');
-    //     createTh.textContent = this.cartContent[i][j];
-    //     createTr.appendChild(createTh);
-    //   }
-      // number += parseInt(this.cartContent[i][2]);
-      // createTotal.textContent = 'Total = ' + number + '€';
-      // getDivArticle.appendChild(createTotal);
-    // }
-

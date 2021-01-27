@@ -17,7 +17,7 @@
 // };
 const cart = new CartObject();
 cart.cartItems();
-cart.deleteValidateCart();
+cart.emptyCart();
 
 
 

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>Orinoco - Vente de peluches - panier</title>
 </head>
 <body>
@@ -26,7 +27,7 @@
   </nav>
   <section id="panier">
     <div id="article" class="shadow card form">
-      <h4 class="text-center">Détail de votre panier</h4>
+      <h4 class="text-center">Détail du panier</h4>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -34,10 +35,19 @@
             <th scope="col">Couleur</th>
             <th scope="col">Quantité</th>
             <th scope="col">Prix</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody id="details-article"></tbody>
       </table>
+      <!-- <p class="cartIsEmpty">Votre panier est vide</p> -->
+      <p class="total"></p>
+      <div id="continuerSupprimer">
+        <a href="index.html">
+        <button class="btn btn-outline-secondary btnCart"><i class="far fa-hand-point-left"></i> Continuer mes achats</button>
+        </a>
+        <button class="btn btn-outline-secondary btnCart" id="emptyCart">Supprimer mon panier</button>
+      </div>
     </div>
 
     <div id="formulaire" class="shadow card form">

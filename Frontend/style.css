@@ -71,23 +71,76 @@ h4 {
     width: 400px;
 }
 
+*, ::after, ::before {
+    box-sizing: content-box!important;
+}
+
 thead {
     background-color: rgb(243 233 241);
 }
 
+.table td, .table th {
+    padding: 10px;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.adjustQuantity {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid rgba(222, 226, 230, 1);
+    border-radius: 20px;
+}
+
+.adjustQuantity p {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    text-align: center;
+}
+p.addMinus {
+    border: 1px solid rgba(222, 226, 230, 1);
+    border-radius: 50%;
+    color: white;
+    background-color: #e6e5e5;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+p.addMinus:last-child {
+    background-color: #c5c5c5;
+}
+
+.addMinus:hover {
+    cursor: pointer;
+}
+
+.fa-trash-alt:hover {
+    cursor: pointer;
+}
+
 .btnCart {
     font-size: 14px;
-    width: 125px;
+    width: 155px;
     padding: 2px!important;
     margin: 5px;
 }
+.total {
+    text-align: center;
+    font-weight: 600;
+}
+#continuerSupprimer {
+    display: flex;
+    margin: 0 auto;
+}
 
-/* td:last-child {
-    border-right-style: hidden;
-    border-top-style: hidden;
-    border-bottom-style: hidden;
-    padding-right: 0;
-} */
+.form-control {
+    width: 90%;
+    height: 20px;
+}
 
 /* MEDIA QUERIES */
 
