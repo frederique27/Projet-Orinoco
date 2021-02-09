@@ -107,11 +107,6 @@ class Teddybear {
       }); 
       //Créer alert
     });
-    // let color = document.querySelector(".colorSelect").value;
-    // document.querySelector('.addToCart').addEventListener('click', () => {
-    //   cart.addToCart(this.data, color);
-    // });
-
   }
   
   renderTeddies () {

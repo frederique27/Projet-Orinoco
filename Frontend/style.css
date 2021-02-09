@@ -70,6 +70,10 @@ h4 {
     padding: 10px;
     width: 400px;
 }
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
 
 *, ::after, ::before {
     box-sizing: content-box!important;
@@ -138,9 +142,38 @@ p.addMinus:last-child {
 }
 
 .form-control {
-    width: 90%;
+    width: auto;
     height: 20px;
 }
+
+#formulaire span {
+    font-size: 12px;
+    border: 1px solid #ff8a8a;
+    border-radius: .25rem;
+    background-color: #ffdfdf;
+    padding: 2px;
+    display: none;
+    text-align: center;
+    margin: auto;
+    margin-top: 2px;
+}
+
+#thankYou {
+    font-size: 24px;
+    text-align: center;
+    margin: 50px;
+}
+
+.order {
+    margin: 75px;
+    text-align: center;
+}
+.order h2 {
+    font-size: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
 
 /* MEDIA QUERIES */
 

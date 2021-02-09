@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>Orinoco - Vente de peluches - panier</title>
 </head>
@@ -44,36 +43,42 @@
       <p class="total"></p>
       <div id="continuerSupprimer">
         <a href="index.html">
-        <button class="btn btn-outline-secondary btnCart"><i class="far fa-hand-point-left"></i> Continuer mes achats</button>
+        <button class="btn btn-outline-secondary btnCart"><i class="far fa-arrow-alt-circle-left"></i> Continuer mes achats</button>
         </a>
-        <button class="btn btn-outline-secondary btnCart" id="emptyCart">Supprimer mon panier</button>
+        <button class="btn btn-outline-secondary btnCart emptyCart">Supprimer mon panier</button>
       </div>
     </div>
 
     <div id="formulaire" class="shadow card form">
-      <form method="post" name="panier">
+      <form name="cartCheckout" method="post" action="#">
+        <!-- action="/order.html" onsubmit="return validateForm()" -->
         <div class="form-group">
-          <label for="formNom">Nom</label>
-          <input type="text" class="form-control" id="formNom">
+          <label for="formLastName">Nom</label>
+          <input type="text" class="form-control" id="formLastName" name="formLastName" pattern="[a-zA-Z]+" minlength="3" maxlength="15"required>
+          <span class="error" id="errorLastName"></span>
         </div>
         <div class="form-group">
-          <label for="formPrenom">Prénom</label>
-          <input type="text" class="form-control" id="formPrenom">
+          <label for="formFirstName">Prénom</label>
+          <input type="text" class="form-control" id="formFirstName" name="formFirstName" pattern="[a-zA-Z]+" minlength="3" maxlength="15" required>
+          <span class="error" id="errorFirstName"></span>
         </div>
         <div class="form-group">
-          <label for="formEmail">E-mail</label>
-          <input type="email" class="form-control" id="formEmail">
+          <label for="formEmail">Email</label>
+          <input type="email" class="form-control" id="formEmail" name="formEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+          <span class="error" id="errorEmail"></span>
         </div>
         <div class="form-group">
-          <label for="formAdresse">Adresse</label>
-          <input type="text" class="form-control" id="formAdresse">
+          <label for="formAddress">Adresse</label>
+          <input type="text" class="form-control" id="formAddress" name="formAddress" pattern="[a-zA-Z0-9]+" minlength="3" maxlength="15" required>
+          <span class="error" id="errorAddress"></span>
         </div>
         <div class="form-group">
-          <label for="formVille">Ville</label>
-          <input type="text" class="form-control" id="formVille">
+          <label for="formCity">Ville</label>
+          <input type="text" class="form-control" id="formCity" name="formCity" pattern="[a-zA-Z]+" minlength="3" maxlength="15" required>
+          <span class="error" id="errorCity"></span>
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-outline-secondary">Valider mon panier</button>
+          <button type="submit" class="btn btn-outline-secondary btnForm">Valider mon panier</button>
         </div>
       </form>
     </div>
