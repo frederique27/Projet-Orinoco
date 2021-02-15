@@ -104,8 +104,7 @@ class Teddybear {
       'price': this.price,
       'id': this.id,
       'color': document.querySelector(".colorSelect").value,
-      }); 
-      //Créer alert
+      });  
     });
   }
   
@@ -124,6 +123,5 @@ class Teddybear {
     this.insertPrice();
     this.insertColor();
     this.insertBtnAddCart();
-  }
-        
+  }      
 }

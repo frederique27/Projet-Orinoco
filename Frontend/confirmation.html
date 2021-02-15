@@ -10,22 +10,27 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="index.html">
       <img src="image/orinoco.png" alt="">
-    </a>
   </nav>
-  <h1 id="thankYou">Merci d'avoir commandé chez Orinoco</h1>
-  <div class="order">
-    <p id="orderID"></p>
-    <p id="orderLastName"></p>
-    <p id="orderFirstName"></p>
-    <p id="orderAddress"></p>
-    <p id="orderCity"></p>
-    <p id="orderEmail"></p>
-    <a href="index.html">
+  <h1 id="recap">Récapitulatif de la commande</h1>
+  <p id="orderID"></p>
+  <div id="orderInfo">
+    <div class="order" id="clientInfo">
+      <p id="orderLastName"></p>
+      <p id="orderFirstName"></p>
+      <p id="orderAddress"></p>
+      <p id="orderCity"></p>
+      <p id="orderEmail"></p>
+    </div>
+    <div class="order" id="productInfo">
+      <p>Produit:</p>
+      <p>Quantité:</p>
+      <p>Montant:</p>
+    </div>
+  </div>
+    <a id="goBack" href="index.html">
       <button class="btn btn-outline-secondary btnCart emptyCart">Retourner à l'accueil</button>
     </a>
-  </div>
  
   <script src="cartObject.js"></script>
   <script src="confirmation.js"></script>

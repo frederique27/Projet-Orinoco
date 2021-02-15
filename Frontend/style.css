@@ -125,6 +125,10 @@ p.addMinus:last-child {
 .fa-trash-alt:hover {
     cursor: pointer;
 }
+.cartIsEmpty{
+    display: none;
+    text-align: center;
+}
 
 .btnCart {
     font-size: 14px;
@@ -158,21 +162,29 @@ p.addMinus:last-child {
     margin-top: 2px;
 }
 
-#thankYou {
+#recap {
     font-size: 24px;
     text-align: center;
+    margin-top: 50px;
+}
+#orderInfo {
+    display: flex;
+    justify-content: space-around;
     margin: 50px;
 }
 
-.order {
-    margin: 75px;
+#orderID {
     text-align: center;
 }
-.order h2 {
-    font-size: 20px;
-    margin: 20px;
-    text-align: center;
+
+#goBack {
+    display: flex;
+    text-decoration: none;
 }
+#goBack button {
+    margin: auto;
+}
+
 
 
 /* MEDIA QUERIES */

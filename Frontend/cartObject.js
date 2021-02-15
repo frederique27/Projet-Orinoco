@@ -30,7 +30,14 @@ class CartObject {
     localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
   }
 
-  deleteItem(createTr, cartItem) {
+  deleteItem(cartItem) {
+    const index = this.cartContent.indexOf(cartItem);
+    const removeTeddy = this.cartContent.splice(index, 1);
+    localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
+    window.location.reload();
+  }
+
+  trashcanIcon(createTr) {
     const tdDelete = document.createElement('td');
     tdDelete.setAttribute('class', 'tdDelete');
     createTr.appendChild(tdDelete);
@@ -39,34 +46,7 @@ class CartObject {
     tdDelete.appendChild(createIcon);
 
     createIcon.addEventListener('click', (e) => {
-      const index = this.cartContent.indexOf(cartItem);
-      const removeTeddy = this.cartContent.splice(index, 1);
-      localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
-      window.location.reload();
-    })
-  }
-
-  removeItem(buttonLess, cartItem, Pquantity) {
-    buttonLess.addEventListener('click', (e) => {
-      cartItem.quantity--;
-      localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
-      Pquantity.textContent = cartItem.quantity;
-      window.location.reload();
-      if (cartItem.quantity === 0) {
-        const id = this.cartContent.indexOf(cartItem);
-        const removedItem = this.cartContent.splice(id, 1);
-        localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
-        this.updateTotal();
-      }
-    })
-  }
-
-  addItem(buttonAdd, cartItem, Pquantity) {
-    buttonAdd.addEventListener('click', (e) => {
-      cartItem.quantity++;
-      localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
-      Pquantity.textContent = cartItem.quantity;
-      this.updateTotal();
+      this.deleteItem();
     })
   }
 
@@ -77,6 +57,38 @@ class CartObject {
       cartTotal += parseInt(cartItem.quantity) * parseInt(cartItem.price);
     })
     getPTotal.textContent = 'Total  ' + cartTotal + '€';
+  }
+
+  quantityLess(cartItem, divQuantity, Pquantity) {
+    const buttonLess = document.createElement('p');
+    buttonLess.setAttribute('class', 'addMinus');
+    buttonLess.textContent = '-';
+    divQuantity.appendChild(buttonLess);
+
+    buttonLess.addEventListener('click', (e) => {
+      if (cartItem.quantity === 1) {
+        this.deleteItem(cartItem);
+      } else {
+        cartItem.quantity--;
+        localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
+        Pquantity.textContent = cartItem.quantity;
+        this.updateTotal();
+      }
+    })
+  }
+
+  quantityMore(cartItem, divQuantity, Pquantity) {
+    const buttonAdd = document.createElement('p');
+    buttonAdd.setAttribute('class', 'addMinus');
+    buttonAdd.textContent = '+';
+    divQuantity.appendChild(buttonAdd);
+
+    buttonAdd.addEventListener('click', (e) => {
+      cartItem.quantity++;
+      localStorage.setItem('cartContent', JSON.stringify(this.cartContent));
+      Pquantity.textContent = cartItem.quantity;
+      this.updateTotal();
+    })
   }
 
   emptyCart() {
@@ -90,57 +102,49 @@ class CartObject {
 
   cartItems() {
     let getTbody = document.querySelector('#details-article');
-
-    for (let cartItem of this.cartContent) {
-      const createTr = document.createElement('tr');
-      createTr.setAttribute('class', 'createTr');
-      getTbody.appendChild(createTr);
-
-      const tdName = document.createElement('td');
-      tdName.textContent = cartItem.name;
-      createTr.appendChild(tdName);
-
-      const tdColor = document.createElement('td');
-      tdColor.textContent = cartItem.color;
-      createTr.appendChild(tdColor);
-
-      const tdQuantity = document.createElement('td');
-      createTr.appendChild(tdQuantity);
-      const divQuantity = document.createElement('div');
-      divQuantity.setAttribute('class', 'adjustQuantity');
-      tdQuantity.appendChild(divQuantity);
-
-      const buttonLess = document.createElement('p');
-      buttonLess.setAttribute('class', 'addMinus');
-      buttonLess.textContent = '-';
-      divQuantity.appendChild(buttonLess);
-      
-      const Pquantity = document.createElement('p');
-      Pquantity.textContent = cartItem.quantity;
-      divQuantity.appendChild(Pquantity);
-
-      const buttonAdd = document.createElement('p');
-      buttonAdd.setAttribute('class', 'addMinus');
-      buttonAdd.textContent = '+';
-      divQuantity.appendChild(buttonAdd);
-
-      const tdPrice = document.createElement('td');
-      tdPrice.textContent = cartItem.price;
-      createTr.appendChild(tdPrice);
-
-      this.updateTotal();
-      this.removeItem(buttonLess, cartItem, Pquantity);
-      this.addItem(buttonAdd, cartItem, Pquantity);
-      this.deleteItem(createTr, cartItem);
+    if (this.cartContent < [0]) {
+      let ifEmpty = document.querySelector('.cartIsEmpty');
+      ifEmpty.style.display = 'unset';
+    } else {
+      for (let cartItem of this.cartContent) {
+        const createTr = document.createElement('tr');
+        createTr.setAttribute('class', 'createTr');
+        getTbody.appendChild(createTr);
+  
+        const tdName = document.createElement('td');
+        tdName.textContent = cartItem.name;
+        createTr.appendChild(tdName);
+  
+        const tdColor = document.createElement('td');
+        tdColor.textContent = cartItem.color;
+        createTr.appendChild(tdColor);
+  
+        const tdQuantity = document.createElement('td');
+        createTr.appendChild(tdQuantity);
+        const divQuantity = document.createElement('div');
+        divQuantity.setAttribute('class', 'adjustQuantity');
+        tdQuantity.appendChild(divQuantity);
+  
+        const Pquantity = document.createElement('p');
+        this.quantityLess(cartItem, divQuantity, Pquantity);
+        Pquantity.textContent = cartItem.quantity;
+        divQuantity.appendChild(Pquantity);
+        this.quantityMore(cartItem, divQuantity, Pquantity);
+  
+        const tdPrice = document.createElement('td');
+        tdPrice.textContent = cartItem.price;
+        createTr.appendChild(tdPrice);
+  
+        this.trashcanIcon(createTr);
+        this.updateTotal();
+      }
     }
   }
 
   checkFormInput() {
-    // RegExp
     let checkString = /[a-zA-Z\s\-]{3,}/;
     let checkEmail = /.+@.+\..+/;
     let checkAddress = /\d{1,5}[a-zA-Z0-9\s]/;
-
     let formLastName = document.getElementById("formLastName").value;
     let formFirstName = document.getElementById("formFirstName").value;
     let formAddress = document.getElementById("formAddress").value;
@@ -148,33 +152,43 @@ class CartObject {
     let formEmail = document.getElementById("formEmail").value;
 
     if (checkString.test(formLastName) == false) {
-      let errorLastName = document.querySelector('#errorLastName');
-      errorLastName.style.display = 'unset';
-      errorLastName.textContent = "Veuillez renseigner votre nom";
+      alert('Veuillez renseigner votre nom');
       return false;
     } else if (checkString.test(formFirstName) == false) {
-      let errorFirstName = document.querySelector('#errorFirstName');
-      errorFirstName.style.display = 'unset';
-      errorFirstName.textContent = "Veuillez renseigner votre prénom";
+      alert('Veuillez renseigner votre prénom');
       return false;
     } else if (checkEmail.test(formEmail) == false) {
-      let errorEmail = document.querySelector('#errorEmail');
-      errorEmail.style.display = 'unset';
-      errorEmail.textContent = "Votre email doit être au format xxx@yyy.zzz";
+      alert('Votre email doit être au format xxx@yyy.zzz');
       return false;
     } else if (checkAddress.test(formAddress) == false) {
-      let errorAddress = document.querySelector('#errorAddress');
-      errorAddress.style.display = 'unset';
-      errorAddress.textContent = "Veuillez renseigner votre adresse";
+      alert('Veuillez renseigner votre adresse');
       return false;
     } else if (checkString.test(formCity) == false) {
-      let errorCity = document.querySelector('#errorCity');
-      errorCity.style.display = 'unset';
-      errorCity.textContent = "Veuillez renseigner le nom de votre ville";
+      alert('Veuillez renseigner le nom de votre ville');
       return false;
     } else {
       return true;
     }
+  }
+
+  fetchRequest(contactProducts) {
+    let JSONContactProducts = JSON.stringify(contactProducts);
+    (async () => {
+      const sendForm = fetch("http://localhost:3000/api/teddies/order", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/JSON',
+          'Content-Type': 'application/JSON'
+        },
+        body: JSONContactProducts,
+      }).then((response) => {
+        return response.json();
+      }).then((data) => {
+        localStorage.setItem('order', JSON.stringify(data));
+        document.location.href = "confirmation.html"
+      });
+    })
+    ();
   }
 
   validateForm() {
@@ -199,32 +213,7 @@ class CartObject {
           contact,
           products
         };
-        console.log(contactProducts);
-
-        let objetRequest = JSON.stringify(contactProducts);
-        console.log(objetRequest);
-
-        let request = new XMLHttpRequest();
-        let url = "http://localhost:3000/api/teddies/order";
-        (async () => {
-          const envoiForm = fetch("http://localhost:3000/api/teddies/order", {
-            method: "POST",
-            headers: {
-              'Accept': 'application/JSON',
-              'Content-Type': 'application/JSON'
-            },
-            body: objetRequest,
-          }).then((response) => {
-            return response.json();
-          }).then((data) => {
-            console.log(data);
-            // this.clearCart();
-            localStorage.setItem('order', JSON.stringify(data));
-            // console.log(this.cart);
-
-            document.location.href = "confirmation.html"
-          });
-        })();
+        this.fetchRequest(contactProducts);
       }
     })
   }
@@ -232,7 +221,6 @@ class CartObject {
   resultOrder() {
     if (localStorage.getItem("order") != null) {
       this.contactProducts = JSON.parse(localStorage.getItem("order"));
-      console.log(this.contactProducts.contact.lastName);
       document.querySelector("#orderID").innerHTML = 'Le numéro de votre commande: ' + this.contactProducts.orderId;
       document.querySelector("#orderLastName").innerHTML = 'Nom: ' + this.contactProducts.contact.lastName;
       document.querySelector("#orderFirstName").innerHTML = 'Prénom: ' + this.contactProducts.contact.firstName;
