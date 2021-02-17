@@ -167,14 +167,10 @@ p.addMinus:last-child {
     text-align: center;
     margin-top: 50px;
 }
-#orderInfo {
-    display: flex;
-    justify-content: space-around;
-    margin: 50px;
-}
 
-#orderID {
+#orderID, .order, #orderTotal {
     text-align: center;
+    margin-top: 30px;
 }
 
 #goBack {

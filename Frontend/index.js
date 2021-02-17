@@ -1,14 +1,20 @@
 const url = "http://localhost:3000/api/teddies";
-let request = new XMLHttpRequest();
-request.open("GET", url);
-request.responseType = "json";
-request.send();
-request.onload = () => {
-  if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      let data = request.response;
-      for (const teddy of data) {
-        const teddybear = new Teddybear(teddy);
-        teddybear.renderTeddies();
+fetch(url)
+  .then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log('Problem. Status Code: ' +
+          response.status);
+        return;
       }
-  }
-};
+      response.json().then(function(data) {
+        for (const teddy of data) {
+          const teddybear = new Teddybear(teddy);
+          teddybear.renderTeddies();
+        }
+      });
+    }
+  )
+  .catch(function(err) {
+    console.log('Fetch Error', err);
+  });

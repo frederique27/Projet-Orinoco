@@ -2,15 +2,20 @@ const url_string = window.location.href;
 const url_product = new URL(url_string);
 const id = url_product.searchParams.get("id");
 const url = "http://localhost:3000/api/teddies/" + id;
-
-let request = new XMLHttpRequest();
-request.open("GET", url);
-request.responseType = "json";
-request.send();
-request.onload = () => {
-  if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-      let data = request.response;
-      const singleProduct = new Teddybear(data);
-      singleProduct.renderSingleTeddy();
-  }
-};
+fetch(url)
+  .then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log('Problem. Status Code: ' +
+          response.status);
+        return;
+      }
+      response.json().then(function(data) {
+          const singleProduct = new Teddybear(data);
+          singleProduct.renderSingleTeddy();
+      });
+    }
+  )
+  .catch(function(err) {
+    console.log('Fetch Error', err);
+  });
