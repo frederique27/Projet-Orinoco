@@ -1,7 +1,7 @@
 const url_string = window.location.href;
 const url_product = new URL(url_string);
 const id = url_product.searchParams.get("id");
-const url = "http://localhost:3000/api/teddies/" + id;
+const url = "https://orinoco-oc.herokuapp.com/api/teddies/" + id;
 fetch(url)
   .then(
     function(response) {

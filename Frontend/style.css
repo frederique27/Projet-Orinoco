@@ -10,6 +10,13 @@ nav {
     left: 50%;
     transform: translatex(-50%);
 }
+.navbar-nav.navbar-center {
+    display: contents;
+}
+.navbar-nav .nav-link {
+    text-align: right!important;
+    padding: .2rem!important;
+}
 
 /* SLIDER */
 .carousel {
@@ -32,19 +39,27 @@ nav {
 .card-deck {
     margin: auto 15px!important;
     margin-bottom: 20px!important;
+    justify-content: center;
 }
+
+.card-deck .card {
+    min-width: 200px;
+    max-width: 200px;
+}
+
+#teddybears {
+    margin: 10px;
+}
+
 .col {
     max-width: 800px;
-    margin: 20px auto;
+    margin: 10px auto;
+    width: auto!important;
 }
 h5 {
     height: 50px;
 }
-#teddybears .card img {
-    max-width: 500px;
-    /* min-height: 160px; */
-    margin: 10px auto 0;
-}
+
 .card-footer {
     border-top: none!important;
     margin: auto;
@@ -150,17 +165,7 @@ p.addMinus:last-child {
     height: 20px;
 }
 
-#formulaire span {
-    font-size: 12px;
-    border: 1px solid #ff8a8a;
-    border-radius: .25rem;
-    background-color: #ffdfdf;
-    padding: 2px;
-    display: none;
-    text-align: center;
-    margin: auto;
-    margin-top: 2px;
-}
+/* PAGE CONFIRMATION*/
 
 #recap {
     font-size: 24px;
@@ -176,15 +181,37 @@ p.addMinus:last-child {
 #goBack {
     display: flex;
     text-decoration: none;
+    margin-bottom: 20px;
 }
 #goBack button {
     margin: auto;
 }
 
-
-
 /* MEDIA QUERIES */
+@media screen and (max-width: 526px) {
+    #carouselExampleIndicators {
+        display: none;
+    }
+}
 
-/* @media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
+    #panier {
+        display: inline;
+    }
+    .form {
+        margin: 20px auto;
+    }  
+}
+@media screen and (max-width: 500px) {
+    #article{
+        overflow-x: auto;
+    }
+    .form {
+        width: auto;
+        margin: 15px 10px;
+    }
+    .navbar-toggler {
+        padding: 0;
+    }
+}
 
-} */

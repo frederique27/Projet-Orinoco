@@ -1,4 +1,4 @@
-const url = "http://localhost:3000/api/teddies";
+const url = "https://orinoco-oc.herokuapp.com/api/teddies";
 fetch(url)
   .then(
     function(response) {

@@ -51,30 +51,29 @@
 
     <div id="formulaire" class="shadow card form">
       <form name="cartCheckout" method="post" action="#">
-        <!-- action="/order.html" onsubmit="return validateForm()" -->
         <div class="form-group">
           <label for="formLastName">Nom</label>
-          <input type="text" class="form-control" id="formLastName" name="formLastName" pattern="[a-zA-Z]+" minlength="3" maxlength="15"required>
+          <input type="text" class="form-control" id="formLastName" name="formLastName" minlength="3" required>
           <span class="error" id="errorLastName"></span>
         </div>
         <div class="form-group">
           <label for="formFirstName">Prénom</label>
-          <input type="text" class="form-control" id="formFirstName" name="formFirstName" pattern="[a-zA-Z]+" minlength="3" maxlength="15" required>
+          <input type="text" class="form-control" id="formFirstName" name="formFirstName" minlength="3" required>
           <span class="error" id="errorFirstName"></span>
         </div>
         <div class="form-group">
           <label for="formEmail">Email</label>
-          <input type="email" class="form-control" id="formEmail" name="formEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+          <input type="email" class="form-control" id="formEmail" name="formEmail" required>
           <span class="error" id="errorEmail"></span>
         </div>
         <div class="form-group">
           <label for="formAddress">Adresse</label>
-          <input type="text" class="form-control" id="formAddress" name="formAddress" pattern="[a-zA-Z0-9]+" minlength="3" maxlength="15" required>
+          <input type="text" class="form-control" id="formAddress" name="formAddress" minlength="3" required>
           <span class="error" id="errorAddress"></span>
         </div>
         <div class="form-group">
           <label for="formCity">Ville</label>
-          <input type="text" class="form-control" id="formCity" name="formCity" pattern="[a-zA-Z]+" minlength="3" maxlength="15" required>
+          <input type="text" class="form-control" id="formCity" name="formCity" minlength="3" required>
           <span class="error" id="errorCity"></span>
         </div>
         <div class="card-footer">
@@ -83,8 +82,10 @@
       </form>
     </div>
   </section>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   
-  <script src="teddybear.js"></script>
   <script src="cartObject.js"></script>
   <script src="cart.js"></script>
 

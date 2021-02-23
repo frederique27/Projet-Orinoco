@@ -196,6 +196,7 @@ class CartObject {
         localStorage.setItem('order', JSON.stringify(data));
         document.location.href = "confirmation.html"
       });
+      localStorage.clear();
     })
     ();
   }
@@ -225,19 +226,5 @@ class CartObject {
         this.fetchRequest(contactProducts);
       }
     })
-  }
-
-  resultOrder() {
-    if (localStorage.getItem("order") != null) {
-      this.contactProducts = JSON.parse(localStorage.getItem("order"));
-      document.querySelector("#orderID").innerHTML = 'Numéro de votre commande: ' + this.contactProducts.orderId;
-      this.updateTotal('Montant de votre commande: ');
-      document.querySelector("#orderLastName").innerHTML = 'Nom: ' + this.contactProducts.contact.lastName;
-      document.querySelector("#orderFirstName").innerHTML = 'Prénom: ' + this.contactProducts.contact.firstName;
-      document.querySelector("#orderEmail").innerHTML = 'Email: ' + this.contactProducts.contact.email;
-      document.querySelector("#orderAddress").innerHTML = 'Adresse: ' + this.contactProducts.contact.address;
-      document.querySelector("#orderCity").innerHTML = 'Ville: ' + this.contactProducts.contact.city;
-      this.emptyCart();
-    }
   }
 }
