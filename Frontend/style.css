@@ -182,9 +182,8 @@ p.addMinus:last-child {
     display: flex;
     text-decoration: none;
     margin-bottom: 20px;
-}
-#goBack button {
     margin: auto;
+    justify-content: center;
 }
 
 /* MEDIA QUERIES */

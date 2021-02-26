@@ -183,7 +183,7 @@ class CartObject {
   fetchRequest(contactProducts) {
     let JSONContactProducts = JSON.stringify(contactProducts);
     (async () => {
-      fetch("http://localhost:3000/api/teddies/order", {
+      fetch("https://orinoco-oc.herokuapp.com/api/teddies/order", {
         method: "POST",
         headers: {
           'Accept': 'application/JSON',
